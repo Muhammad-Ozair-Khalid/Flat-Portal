@@ -1,8 +1,20 @@
-import { MapPin } from "lucide-react";
 import { requireMember } from "@/lib/auth";
-import { ComingSoon } from "@/components/app/coming-soon";
+import { PageHeader } from "@/components/ui/page-header";
+import { LocationSharing } from "./location-sharing";
 
 export default async function LocationPage() {
-  await requireMember();
-  return <ComingSoon title="Location" description="Choose whether to share your location." icon={MapPin} />;
+  const { profile, supabase } = await requireMember();
+
+  const { data: loc } = await supabase
+    .from("locations")
+    .select("sharing_enabled, latitude, longitude, updated_at")
+    .eq("user_id", profile.id)
+    .maybeSingle();
+
+  return (
+    <div>
+      <PageHeader title="Location" description="You decide whether to share your location — and only admins can see it." />
+      <LocationSharing initial={loc} userId={profile.id} userName={profile.full_name ?? "You"} />
+    </div>
+  );
 }
