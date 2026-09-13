@@ -38,7 +38,7 @@ export function Topbar({
           {current?.label ?? "Flat Portal"}
         </h2>
         <div className="ml-auto flex items-center gap-2">
-          <NotificationBell count={unreadCount} />
+          <NotificationBell count={unreadCount} userId={profile.id} />
           <ThemeToggle />
           <UserMenu profile={profile} />
         </div>
