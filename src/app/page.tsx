@@ -3,6 +3,7 @@ import { ArrowRight, Bell, ListChecks, MapPin, MessagesSquare, ShieldCheck } fro
 import { Logo } from "@/components/brand/logo";
 import { IsometricFlat } from "@/components/brand/isometric-flat";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Tilt3D } from "@/components/ui/tilt";
 
 const features = [
   {
@@ -94,7 +95,7 @@ export default function LandingPage() {
 
           {/* The one bold element: an isometric 3D floor plan */}
           <div className="relative" style={{ animation: "flat-rise 0.7s ease 0.1s both" }}>
-            <div className="glass rounded-2xl border border-border/70 p-5 elevate-lg">
+            <Tilt3D className="glass rounded-2xl border border-border/70 p-5 elevate-lg">
               <div className="mb-1 flex items-center justify-between px-1">
                 <span className="font-display text-sm font-semibold text-foreground">
                   Flat 3B — Elm Court
@@ -112,7 +113,7 @@ export default function LandingPage() {
                   <span className="h-2 w-2 rounded-full bg-accent" /> 4 flatmates
                 </span>
               </div>
-            </div>
+            </Tilt3D>
           </div>
         </section>
 

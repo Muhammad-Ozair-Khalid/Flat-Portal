@@ -5,6 +5,7 @@ import { landingPathFor, isSafeNext } from "@/lib/auth-routing";
 import { Logo } from "@/components/brand/logo";
 import { IsometricFlat } from "@/components/brand/isometric-flat";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Tilt3D } from "@/components/ui/tilt";
 import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = { title: "Sign in" };
@@ -28,9 +29,9 @@ export default async function LoginPage({
       <div className="ambient relative hidden flex-col justify-between overflow-hidden p-10 lg:flex">
         <Logo />
         <div className="mx-auto w-full max-w-md">
-          <div className="glass rounded-2xl border border-border/70 p-6 elevate-lg">
+          <Tilt3D className="glass rounded-2xl border border-border/70 p-6 elevate-lg">
             <IsometricFlat />
-          </div>
+          </Tilt3D>
           <h1 className="mt-8 font-display text-4xl font-bold leading-tight tracking-tight text-foreground">
             Welcome home.
           </h1>

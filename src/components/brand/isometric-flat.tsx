@@ -20,19 +20,19 @@ type Room = {
 
 // A clean 6×5 plot, fully tiled.
 const rooms: Room[] = [
-  { name: "Living", x: 0, y: 0, w: 3, h: 3, color: "#2f9e83" },
-  { name: "Kitchen", x: 3, y: 0, w: 3, h: 2, color: "#c98a2e" },
-  { name: "Room A", x: 3, y: 2, w: 3, h: 1, color: "#d9a441" },
-  { name: "Hall", x: 0, y: 3, w: 2, h: 2, color: "#5f8f84" },
-  { name: "Bath", x: 2, y: 3, w: 1, h: 2, color: "#4f93b8" },
-  { name: "Room B", x: 3, y: 3, w: 3, h: 2, color: "#23806a" },
+  { name: "Living", x: 0, y: 0, w: 3, h: 3, color: "#8a5a2b" },
+  { name: "Kitchen", x: 3, y: 0, w: 3, h: 2, color: "#a97b20" },
+  { name: "Room A", x: 3, y: 2, w: 3, h: 1, color: "#c08a4a" },
+  { name: "Hall", x: 0, y: 3, w: 2, h: 2, color: "#6f7a3f" },
+  { name: "Bath", x: 2, y: 3, w: 1, h: 2, color: "#4a6a7a" },
+  { name: "Room B", x: 3, y: 3, w: 3, h: 2, color: "#a23a2a" },
 ];
 
 type Pin = { room: string; label: string; color: string };
 const pins: Pin[] = [
-  { room: "Living", label: "AK", color: "#2f9e83" },
-  { room: "Kitchen", label: "SJ", color: "#c98a2e" },
-  { room: "Room B", label: "MR", color: "#23806a" },
+  { room: "Living", label: "AK", color: "#8a5a2b" },
+  { room: "Kitchen", label: "SJ", color: "#b05e2e" },
+  { room: "Room B", label: "MR", color: "#a23a2a" },
 ];
 
 function iso(gx: number, gy: number) {
@@ -66,8 +66,8 @@ export function IsometricFlat({ className }: { className?: string }) {
           <feDropShadow dx="0" dy="6" stdDeviation="5" floodColor="#0c1a15" floodOpacity="0.28" />
         </filter>
         <radialGradient id="plot-glow" cx="50%" cy="40%" r="65%">
-          <stop offset="0%" stopColor="#3fbd9b" stopOpacity="0.28" />
-          <stop offset="100%" stopColor="#3fbd9b" stopOpacity="0" />
+          <stop offset="0%" stopColor="#c79a5e" stopOpacity="0.32" />
+          <stop offset="100%" stopColor="#c79a5e" stopOpacity="0" />
         </radialGradient>
       </defs>
 

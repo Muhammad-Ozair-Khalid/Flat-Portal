@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   LayoutDashboard,
   Users,
+  ShieldCheck,
   ListChecks,
   MessageSquareText,
   MessagesSquare,
@@ -24,6 +25,7 @@ export type NavItem = {
 export const adminNav: NavItem[] = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard, exact: true },
   { label: "Users", href: "/admin/users", icon: Users },
+  { label: "Administrators", href: "/admin/administrators", icon: ShieldCheck },
   { label: "Tasks", href: "/admin/tasks", icon: ListChecks },
   { label: "Announcements", href: "/admin/announcements", icon: Megaphone },
   { label: "Locations", href: "/admin/locations", icon: MapPinned },

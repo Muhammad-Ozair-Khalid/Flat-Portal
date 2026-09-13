@@ -4,64 +4,69 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ───────────────────────────────────────────────────────────
-   Flat Portal — "Verdigris & Brass" identity
-   Verdigris (aged-copper green) is the primary; brass/ochre is a
-   rare highlight. Deep pine ink instead of a generic tinted black.
+   Flat Portal — "Cream & Espresso" grungy homestead identity
+   Warm cream paper, espresso ink, leather-brown primary, rust accent,
+   earthy status colours, and a subtle film-grain texture.
    ─────────────────────────────────────────────────────────── */
 :root {
-  --background: #e9ede7;
-  --surface: #f4f6f2;
-  --card: #fbfcfa;
-  --popover: #ffffff;
-  --foreground: #13211c;
-  --muted: #dee4d9;
-  --muted-foreground: #566258;
-  --primary: #1f7a5e;
-  --primary-hover: #1a6b52;
-  --primary-foreground: #f2f9f4;
-  --accent: #a86f1c;
-  --accent-foreground: #fff8ec;
-  --border: #d2d9cd;
-  --input: #d2d9cd;
-  --ring: #1f7a5e;
+  --background: #ece2ce;
+  --surface: #e4d7be;
+  --card: #f7f1e3;
+  --popover: #fbf7ec;
+  --foreground: #221a12;
+  --muted: #ddd0b5;
+  --muted-foreground: #6f5f49;
+  --primary: #8a5a2b;
+  --primary-hover: #744a22;
+  --primary-foreground: #f8f1e4;
+  --accent: #b05e2e;
+  --accent-foreground: #fbf0e6;
+  --border: #cebd9b;
+  --input: #cebd9b;
+  --ring: #8a5a2b;
 
-  --success: #2e7d46;
-  --success-foreground: #f1faf2;
-  --warning: #a86f1c;
-  --warning-foreground: #fff8ec;
-  --danger: #c0392b;
-  --danger-foreground: #fdf2f1;
-  --info: #2f6fb0;
-  --info-foreground: #f1f6fc;
+  --success: #5f7138;
+  --success-foreground: #f6f7ee;
+  --warning: #a97b20;
+  --warning-foreground: #fff7e6;
+  --danger: #a23a2a;
+  --danger-foreground: #fdeee9;
+  --info: #4a6a7a;
+  --info-foreground: #eef4f6;
 
   --radius: 0.85rem;
+  --grain-opacity: 0.5;
+  --grain-blend: soft-light;
 }
 
 .dark {
-  --background: #0d1512;
-  --surface: #121d18;
-  --card: #16211c;
-  --popover: #182420;
-  --foreground: #e7ede8;
-  --muted: #1e2a24;
-  --muted-foreground: #93a49a;
-  --primary: #34b18c;
-  --primary-hover: #3cc199;
-  --primary-foreground: #04130d;
-  --accent: #d89a3c;
-  --accent-foreground: #1a1204;
-  --border: #26332c;
-  --input: #26332c;
-  --ring: #34b18c;
+  --background: #16110b;
+  --surface: #1e1710;
+  --card: #241c13;
+  --popover: #2a2016;
+  --foreground: #efe4d2;
+  --muted: #2c2318;
+  --muted-foreground: #ab9c84;
+  --primary: #ca9a5f;
+  --primary-hover: #d8a969;
+  --primary-foreground: #201509;
+  --accent: #d07d45;
+  --accent-foreground: #1e1206;
+  --border: #372b1d;
+  --input: #372b1d;
+  --ring: #ca9a5f;
 
-  --success: #4caf6d;
-  --success-foreground: #04130a;
-  --warning: #d89a3c;
-  --warning-foreground: #1a1204;
-  --danger: #e05b4d;
-  --danger-foreground: #1c0805;
-  --info: #5b9bd8;
-  --info-foreground: #04121c;
+  --success: #8aa354;
+  --success-foreground: #12160a;
+  --warning: #d3a54a;
+  --warning-foreground: #201603;
+  --danger: #d05a45;
+  --danger-foreground: #1f0a06;
+  --info: #7fa2b3;
+  --info-foreground: #0a1418;
+
+  --grain-opacity: 0.7;
+  --grain-blend: overlay;
 }
 
 @theme inline {
@@ -114,9 +119,21 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    position: relative;
+  }
+  /* Film-grain / grunge texture over the whole app (below modals). */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: var(--grain-blend);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   }
   ::selection {
-    background-color: color-mix(in oklab, var(--primary) 25%, transparent);
+    background-color: color-mix(in oklab, var(--primary) 28%, transparent);
   }
   :focus-visible {
     outline: 2px solid var(--ring);
@@ -126,7 +143,6 @@
     font-family: var(--font-display);
     letter-spacing: -0.015em;
   }
-  /* Quiet, thin scrollbars that match the theme */
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--muted-foreground) transparent;
@@ -143,56 +159,70 @@
   }
 }
 
-/* ── Depth & dimension utilities ─────────────────────────────── */
+/* ── Depth, dimension & motion utilities ─────────────────────── */
 @layer utilities {
   .elevate-sm {
     box-shadow:
-      0 1px 2px rgba(12, 26, 21, 0.06),
-      0 2px 6px -2px rgba(12, 26, 21, 0.1);
+      0 1px 2px rgba(34, 20, 8, 0.08),
+      0 2px 6px -2px rgba(34, 20, 8, 0.12);
   }
   .elevate {
     box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.04) inset,
-      0 2px 4px rgba(12, 26, 21, 0.06),
-      0 14px 30px -18px rgba(12, 26, 21, 0.4);
+      0 1px 0 rgba(255, 250, 235, 0.5) inset,
+      0 2px 4px rgba(34, 20, 8, 0.08),
+      0 16px 32px -20px rgba(34, 20, 8, 0.45);
   }
   .elevate-lg {
     box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.05) inset,
-      0 8px 20px -8px rgba(12, 26, 21, 0.22),
-      0 30px 60px -30px rgba(12, 26, 21, 0.55);
+      0 1px 0 rgba(255, 250, 235, 0.55) inset,
+      0 10px 22px -10px rgba(34, 20, 8, 0.28),
+      0 34px 64px -32px rgba(34, 20, 8, 0.6);
   }
   .dark .elevate,
   .dark .elevate-lg,
   .dark .elevate-sm {
     box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.05) inset,
-      0 10px 26px -12px rgba(0, 0, 0, 0.6),
-      0 30px 60px -30px rgba(0, 0, 0, 0.7);
+      0 1px 0 rgba(255, 230, 190, 0.06) inset,
+      0 12px 28px -12px rgba(0, 0, 0, 0.7),
+      0 34px 64px -32px rgba(0, 0, 0, 0.8);
   }
   .glass {
-    background-color: color-mix(in oklab, var(--card) 72%, transparent);
-    backdrop-filter: blur(14px) saturate(1.4);
-    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    background-color: color-mix(in oklab, var(--card) 74%, transparent);
+    backdrop-filter: blur(14px) saturate(1.35);
+    -webkit-backdrop-filter: blur(14px) saturate(1.35);
   }
   .text-gradient {
-    background: linear-gradient(100deg, var(--primary), var(--accent));
+    background: linear-gradient(100deg, var(--primary), var(--accent) 60%, var(--warning));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-  /* Ambient colour wash used behind heroes and dashboards */
   .ambient {
     background-image:
-      radial-gradient(60% 55% at 12% 8%, color-mix(in oklab, var(--primary) 26%, transparent), transparent 70%),
-      radial-gradient(55% 50% at 92% 12%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 70%),
-      radial-gradient(70% 60% at 60% 105%, color-mix(in oklab, var(--info) 14%, transparent), transparent 70%);
+      radial-gradient(58% 55% at 10% 6%, color-mix(in oklab, var(--primary) 30%, transparent), transparent 70%),
+      radial-gradient(55% 50% at 94% 10%, color-mix(in oklab, var(--accent) 26%, transparent), transparent 70%),
+      radial-gradient(70% 60% at 60% 108%, color-mix(in oklab, var(--warning) 18%, transparent), transparent 70%);
   }
+  /* 3D-ish hover lift */
   .raise {
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    transition: transform 0.22s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.22s ease;
+    transform-style: preserve-3d;
   }
   .raise:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px) scale(1.006);
+  }
+  /* pointer-driven 3D tilt (JS sets --rx / --ry) */
+  .tilt3d {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.15s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .press {
+    transition: transform 0.1s ease;
+  }
+  .press:active {
+    transform: translateY(1px) scale(0.985);
   }
 }
 
@@ -202,8 +232,13 @@
 }
 
 @keyframes flat-rise {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sheen {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 @layer components {
@@ -216,13 +251,14 @@
     font-size: 0.875rem;
     color: var(--foreground);
     outline: none;
-    transition: border-color 0.15s ease;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
   .input::placeholder {
     color: var(--muted-foreground);
   }
   .input:focus {
     border-color: var(--ring);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 18%, transparent);
   }
 }
 
@@ -233,4 +269,6 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+  .raise:hover { transform: none; }
+  .tilt3d { transform: none !important; }
 }
