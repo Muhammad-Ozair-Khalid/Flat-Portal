@@ -206,6 +206,26 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@layer components {
+  .input {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--input);
+    background-color: var(--card);
+    padding: 0.55rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--foreground);
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .input::placeholder {
+    color: var(--muted-foreground);
+  }
+  .input:focus {
+    border-color: var(--ring);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
