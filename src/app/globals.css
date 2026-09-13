@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+/* Class-based dark mode: toggle by adding `.dark` on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ───────────────────────────────────────────────────────────
+   Flat Portal — "Verdigris & Brass" identity
+   Verdigris (aged-copper green) is the primary; brass/ochre is a
+   rare highlight. Deep pine ink instead of a generic tinted black.
+   ─────────────────────────────────────────────────────────── */
+:root {
+  --background: #e9ede7;
+  --surface: #f4f6f2;
+  --card: #fbfcfa;
+  --popover: #ffffff;
+  --foreground: #13211c;
+  --muted: #dee4d9;
+  --muted-foreground: #566258;
+  --primary: #1f7a5e;
+  --primary-hover: #1a6b52;
+  --primary-foreground: #f2f9f4;
+  --accent: #a86f1c;
+  --accent-foreground: #fff8ec;
+  --border: #d2d9cd;
+  --input: #d2d9cd;
+  --ring: #1f7a5e;
+
+  --success: #2e7d46;
+  --success-foreground: #f1faf2;
+  --warning: #a86f1c;
+  --warning-foreground: #fff8ec;
+  --danger: #c0392b;
+  --danger-foreground: #fdf2f1;
+  --info: #2f6fb0;
+  --info-foreground: #f1f6fc;
+
+  --radius: 0.85rem;
+}
+
+.dark {
+  --background: #0d1512;
+  --surface: #121d18;
+  --card: #16211c;
+  --popover: #182420;
+  --foreground: #e7ede8;
+  --muted: #1e2a24;
+  --muted-foreground: #93a49a;
+  --primary: #34b18c;
+  --primary-hover: #3cc199;
+  --primary-foreground: #04130d;
+  --accent: #d89a3c;
+  --accent-foreground: #1a1204;
+  --border: #26332c;
+  --input: #26332c;
+  --ring: #34b18c;
+
+  --success: #4caf6d;
+  --success-foreground: #04130a;
+  --warning: #d89a3c;
+  --warning-foreground: #1a1204;
+  --danger: #e05b4d;
+  --danger-foreground: #1c0805;
+  --info: #5b9bd8;
+  --info-foreground: #04121c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-popover: var(--popover);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 0.35rem);
+  --radius-md: calc(var(--radius) - 0.2rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.4rem);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background-color: color-mix(in oklab, var(--primary) 25%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+  /* Quiet, thin scrollbars that match the theme */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted-foreground) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklab, var(--muted-foreground) 45%, transparent);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+/* ── Depth & dimension utilities ─────────────────────────────── */
+@layer utilities {
+  .elevate-sm {
+    box-shadow:
+      0 1px 2px rgba(12, 26, 21, 0.06),
+      0 2px 6px -2px rgba(12, 26, 21, 0.1);
+  }
+  .elevate {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.04) inset,
+      0 2px 4px rgba(12, 26, 21, 0.06),
+      0 14px 30px -18px rgba(12, 26, 21, 0.4);
+  }
+  .elevate-lg {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.05) inset,
+      0 8px 20px -8px rgba(12, 26, 21, 0.22),
+      0 30px 60px -30px rgba(12, 26, 21, 0.55);
+  }
+  .dark .elevate,
+  .dark .elevate-lg,
+  .dark .elevate-sm {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.05) inset,
+      0 10px 26px -12px rgba(0, 0, 0, 0.6),
+      0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  }
+  .glass {
+    background-color: color-mix(in oklab, var(--card) 72%, transparent);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  }
+  .text-gradient {
+    background: linear-gradient(100deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* Ambient colour wash used behind heroes and dashboards */
+  .ambient {
+    background-image:
+      radial-gradient(60% 55% at 12% 8%, color-mix(in oklab, var(--primary) 26%, transparent), transparent 70%),
+      radial-gradient(55% 50% at 92% 12%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 70%),
+      radial-gradient(70% 60% at 60% 105%, color-mix(in oklab, var(--info) 14%, transparent), transparent 70%);
+  }
+  .raise {
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .raise:hover {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes flatpin-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes flat-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
