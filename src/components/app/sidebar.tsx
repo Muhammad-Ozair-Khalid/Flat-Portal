@@ -25,20 +25,17 @@ export function Sidebar({
   return (
     <>
       <div
-        className={cn(
-          "fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden",
-          mobileOpen ? "block" : "hidden",
-        )}
+        className={cn("fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden", mobileOpen ? "block" : "hidden")}
         onClick={onClose}
         aria-hidden="true"
       />
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[17rem] flex-col border-r border-border bg-surface/85 backdrop-blur-xl transition-transform duration-200 lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 flex w-[17rem] flex-col border-r border-border bg-surface/90 backdrop-blur-xl transition-transform duration-200 lg:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="flex h-16 items-center justify-between px-5">
+        <div className="flex h-16 items-center justify-between border-b border-border/60 px-5">
           <Logo />
           <button
             type="button"
@@ -60,29 +57,34 @@ export function Sidebar({
                 onClick={onClose}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
+                  "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all",
                   active
-                    ? "bg-primary/12 text-primary"
+                    ? "bg-primary/12 text-primary elevate-sm"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground",
                 )}
               >
+                {active && <span className="absolute left-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-r-full bg-primary" />}
                 <item.icon
                   className={cn(
-                    "h-[18px] w-[18px] shrink-0",
+                    "h-[18px] w-[18px] shrink-0 transition-transform group-hover:scale-110",
                     active ? "text-primary" : "text-muted-foreground group-hover:text-foreground",
                   )}
                 />
                 <span className="truncate">{item.label}</span>
-                {active && <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />}
               </Link>
             );
           })}
         </nav>
 
-        <div className="border-t border-border px-5 py-4">
-          <p className="text-xs text-muted-foreground">
-            {role === "admin" ? "Administrator workspace" : "Flat member"}
-          </p>
+        <div className="p-3">
+          <div className="rounded-xl border border-border/70 bg-card/70 p-3">
+            <p className="text-xs font-semibold text-foreground">
+              {role === "admin" ? "Administrator" : "Flat member"}
+            </p>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              {role === "admin" ? "Full access to the flat" : "Your shared home, in sync"}
+            </p>
+          </div>
         </div>
       </aside>
     </>
