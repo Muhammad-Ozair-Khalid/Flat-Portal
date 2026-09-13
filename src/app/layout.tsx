@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Bricolage_Grotesque, Hanken_Grotesk } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -39,13 +40,14 @@ export const viewport: Viewport = {
 // Applies the saved (or system) theme before first paint to avoid a flash.
 const themeScript = `(function(){try{var t=localStorage.getItem('flat-portal-theme');var d=t==='dark'||(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){}})();`;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <html lang="en" suppressHydrationWarning className={`${bricolage.variable} ${hanken.variable}`}>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="min-h-dvh antialiased">
         {children}
