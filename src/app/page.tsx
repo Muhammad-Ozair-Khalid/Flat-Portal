@@ -87,9 +87,9 @@ export default function LandingPage() {
                 Continue with Google
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
-              <Link href="#features" className="press inline-flex items-center justify-center rounded-full border border-border bg-card/70 px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:bg-muted">
-                Take a look
-              </Link>
+              <a href="/experience.html" className="press inline-flex items-center justify-center rounded-full border border-border bg-card/70 px-5 py-3.5 text-base font-medium text-foreground transition-colors hover:bg-muted">
+                Watch the flythrough
+              </a>
             </div>
             <p className="mt-5 text-sm text-muted-foreground">New members join once an admin adds them to the flat.</p>
           </Reveal>
