@@ -24,7 +24,8 @@ import {
   type RoomKind,
 } from "@/lib/flat";
 import { RoomScene, type RoomVariant } from "@/components/experience/room-scene";
-import { Tilt3D } from "@/components/ui/tilt";
+import { TiltCard, TiltLayer } from "@/components/motion/tilt-card";
+import { SpringStagger, StaggerItem } from "@/components/motion/spring-in";
 import { Reveal } from "@/components/motion/reveal";
 
 const STORAGE_KEY = "flat408-room-names";
@@ -119,18 +120,18 @@ export function FlatFloor({ role }: { role: "member" | "admin" }) {
         </div>
       </Reveal>
 
-      <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        {ROOMS.map((room, i) => (
-          <Reveal key={room.id} variant="up" delay={i * 60}>
+      <SpringStagger className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        {ROOMS.map((room) => (
+          <StaggerItem key={room.id} className="h-full">
             <RoomTile
               room={room}
               isAdmin={isAdmin}
               names={names}
               onSetName={setName}
             />
-          </Reveal>
+          </StaggerItem>
         ))}
-      </div>
+      </SpringStagger>
     </div>
   );
 }
@@ -150,13 +151,13 @@ function RoomTile({
   const occupants = room.kind === "bedroom" ? membersByRoom(room.id) : [];
 
   return (
-    <Tilt3D max={5} className="h-full">
+    <TiltCard glare intensity={11} scale={1.02} className="h-full rounded-3xl">
       <div
         style={rimStyle(room.hue)}
-        className="glass-panel neon-edge group relative flex h-full flex-col overflow-hidden rounded-3xl"
+        className="glass-panel neon-edge neon-trace group relative flex h-full flex-col rounded-3xl [transform-style:preserve-3d]"
       >
-        {/* 3D doorway — swings open on hover / keyboard focus */}
-        <div className="scene-3d relative h-44 overflow-hidden">
+        {/* 3D doorway — floats forward, swings open on hover / keyboard focus */}
+        <TiltLayer depth={28} className="scene-3d relative h-44 overflow-hidden rounded-t-3xl">
           <div className="absolute inset-0">
             <RoomScene
               variant={room.kind as RoomVariant}
@@ -187,10 +188,10 @@ function RoomTile({
           <span className="pointer-events-none absolute bottom-2 right-3 text-[10px] font-medium uppercase tracking-[0.2em] text-white/80 opacity-100 transition-opacity duration-300 group-hover:opacity-0">
             Hover to open
           </span>
-        </div>
+        </TiltLayer>
 
         {/* Body */}
-        <div className="flex grow flex-col gap-3 p-4">
+        <TiltLayer depth={10} className="flex grow flex-col gap-3 p-4">
           <div className="flex items-center justify-between gap-2">
             <h3 className="font-display text-lg font-bold text-[#eae8ff]">{room.label}</h3>
             <span
@@ -225,9 +226,9 @@ function RoomTile({
           ) : (
             <p className="mt-1 text-sm leading-relaxed text-[#b9b3e8]">{room.blurb}</p>
           )}
-        </div>
+        </TiltLayer>
       </div>
-    </Tilt3D>
+    </TiltCard>
   );
 }
 

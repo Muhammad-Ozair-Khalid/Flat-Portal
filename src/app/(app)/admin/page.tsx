@@ -18,6 +18,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { GreetingHero } from "@/components/app/greeting-hero";
 import { FlatGlance } from "@/components/experience/flat-glance";
 import { Reveal } from "@/components/motion/reveal";
+import { SpringStagger, StaggerItem } from "@/components/motion/spring-in";
 import { describeAudit } from "@/lib/audit-labels";
 import { fromNow, fmtDate } from "@/lib/format";
 import type { TaskPriority, TaskStatus } from "@/lib/types";
@@ -72,16 +73,14 @@ export default async function AdminDashboard() {
     <div>
       <GreetingHero title={`Welcome back, ${firstName}`} subtitle="Here's how the flat is doing today." />
 
-      <Reveal variant="up">
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-          <StatTile label="Members" value={totalUsers.count ?? 0} icon={Users} tone="primary" href="/admin/users" />
-          <StatTile label="Active" value={activeUsers.count ?? 0} icon={UserCheck} tone="success" href="/admin/users" />
-          <StatTile label="Pending approval" value={pendingUsers.count ?? 0} icon={UserPlus} tone="warning" href="/admin/users" hint={pendingUsers.count ? "Needs your review" : undefined} />
-          <StatTile label="Open tasks" value={pendingTasks.count ?? 0} icon={ListChecks} tone="info" href="/admin/tasks" />
-          <StatTile label="Completed" value={completedTasks.count ?? 0} icon={CheckCircle2} tone="success" href="/admin/tasks" />
-          <StatTile label="Overdue" value={overdueTasks.count ?? 0} icon={AlertTriangle} tone="danger" href="/admin/tasks" hint={overdueTasks.count ? "Past deadline" : undefined} />
-        </div>
-      </Reveal>
+      <SpringStagger className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+        <StaggerItem className="h-full"><StatTile label="Members" value={totalUsers.count ?? 0} icon={Users} tone="primary" href="/admin/users" /></StaggerItem>
+        <StaggerItem className="h-full"><StatTile label="Active" value={activeUsers.count ?? 0} icon={UserCheck} tone="success" href="/admin/users" /></StaggerItem>
+        <StaggerItem className="h-full"><StatTile label="Pending approval" value={pendingUsers.count ?? 0} icon={UserPlus} tone="warning" href="/admin/users" hint={pendingUsers.count ? "Needs your review" : undefined} /></StaggerItem>
+        <StaggerItem className="h-full"><StatTile label="Open tasks" value={pendingTasks.count ?? 0} icon={ListChecks} tone="info" href="/admin/tasks" /></StaggerItem>
+        <StaggerItem className="h-full"><StatTile label="Completed" value={completedTasks.count ?? 0} icon={CheckCircle2} tone="success" href="/admin/tasks" /></StaggerItem>
+        <StaggerItem className="h-full"><StatTile label="Overdue" value={overdueTasks.count ?? 0} icon={AlertTriangle} tone="danger" href="/admin/tasks" hint={overdueTasks.count ? "Past deadline" : undefined} /></StaggerItem>
+      </SpringStagger>
 
       <Reveal variant="up" className="mt-6 block">
         <FlatGlance href="/admin/rooms" />

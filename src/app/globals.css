@@ -428,6 +428,79 @@
   }
 }
 
+/* ── Living aurora backdrop + animated neon trace (additive) ─────── */
+@property --neon-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes aurora-drift {
+  0%   { transform: translate3d(-6%, -4%, 0) scale(1); }
+  33%  { transform: translate3d(6%, 4%, 0) scale(1.18); }
+  66%  { transform: translate3d(-3%, 6%, 0) scale(1.06); }
+  100% { transform: translate3d(-6%, -4%, 0) scale(1); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes neon-trace {
+  to { --neon-angle: 360deg; }
+}
+
+@layer utilities {
+  /* Slow drifting indigo/cyan/magenta light field behind heroes */
+  .aurora-bg { overflow: hidden; }
+  .aurora-bg::before,
+  .aurora-bg::after {
+    content: "";
+    position: absolute;
+    inset: -35%;
+    pointer-events: none;
+    filter: blur(30px);
+    background:
+      radial-gradient(36% 36% at 24% 30%, color-mix(in oklab, var(--room-1) 60%, transparent), transparent 70%),
+      radial-gradient(32% 32% at 78% 22%, color-mix(in oklab, var(--room-2) 52%, transparent), transparent 70%),
+      radial-gradient(40% 40% at 62% 82%, color-mix(in oklab, var(--room-3) 46%, transparent), transparent 70%);
+    opacity: 0.5;
+    animation: aurora-drift 24s ease-in-out infinite;
+  }
+  .aurora-bg::after {
+    background:
+      radial-gradient(38% 38% at 70% 42%, color-mix(in oklab, var(--room-kitchen) 46%, transparent), transparent 70%),
+      radial-gradient(34% 34% at 18% 72%, color-mix(in oklab, var(--room-4) 44%, transparent), transparent 70%);
+    opacity: 0.38;
+    animation-duration: 32s;
+    animation-direction: reverse;
+  }
+  .float-slow { animation: float-slow 6s ease-in-out infinite; }
+
+  /* Animated conic rim-light that traces a tile's rounded border */
+  .neon-trace { position: relative; }
+  .neon-trace::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: conic-gradient(
+      from var(--neon-angle),
+      transparent 0deg,
+      color-mix(in oklab, var(--rim, #7c6bff) 92%, white) 40deg,
+      transparent 96deg,
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0.7;
+    pointer-events: none;
+    animation: neon-trace 6s linear infinite;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -438,4 +511,8 @@
   .raise:hover { transform: none; }
   .tilt3d { transform: none !important; }
   .reveal { opacity: 1 !important; transform: none !important; }
+  .aurora-bg::before,
+  .aurora-bg::after { animation: none !important; }
+  .float-slow { animation: none !important; }
+  .neon-trace::after { animation: none !important; opacity: 0 !important; }
 }

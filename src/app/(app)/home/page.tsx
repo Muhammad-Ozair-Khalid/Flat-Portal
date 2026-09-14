@@ -16,6 +16,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { GreetingHero } from "@/components/app/greeting-hero";
 import { FlatGlance } from "@/components/experience/flat-glance";
 import { Reveal } from "@/components/motion/reveal";
+import { SpringStagger, StaggerItem } from "@/components/motion/spring-in";
 import { fmtDate, fromNow, isOverdue } from "@/lib/format";
 import type { TaskPriority, TaskStatus } from "@/lib/types";
 
@@ -75,14 +76,12 @@ export default async function MemberHome() {
     <div>
       <GreetingHero title={`Hi ${firstName} 👋`} subtitle="Here's what's on your plate today." />
 
-      <Reveal variant="up">
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <StatTile label="To do" value={counts.open} icon={ListTodo} tone="info" href="/tasks" />
-          <StatTile label="In progress" value={counts.inProgress} icon={Loader} tone="primary" href="/tasks" />
-          <StatTile label="Completed" value={counts.completed} icon={CheckCircle2} tone="success" href="/tasks" />
-          <StatTile label="Overdue" value={counts.overdue} icon={AlertTriangle} tone="danger" href="/tasks" hint={counts.overdue ? "Needs attention" : undefined} />
-        </div>
-      </Reveal>
+      <SpringStagger className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <StaggerItem className="h-full"><StatTile label="To do" value={counts.open} icon={ListTodo} tone="info" href="/tasks" /></StaggerItem>
+        <StaggerItem className="h-full"><StatTile label="In progress" value={counts.inProgress} icon={Loader} tone="primary" href="/tasks" /></StaggerItem>
+        <StaggerItem className="h-full"><StatTile label="Completed" value={counts.completed} icon={CheckCircle2} tone="success" href="/tasks" /></StaggerItem>
+        <StaggerItem className="h-full"><StatTile label="Overdue" value={counts.overdue} icon={AlertTriangle} tone="danger" href="/tasks" hint={counts.overdue ? "Needs attention" : undefined} /></StaggerItem>
+      </SpringStagger>
 
       <Reveal variant="up" className="mt-6 block">
         <FlatGlance href="/rooms" />

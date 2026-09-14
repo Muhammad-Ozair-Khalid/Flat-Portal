@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import { rimStyle } from "@/lib/flat";
+import { TiltCard, TiltLayer } from "@/components/motion/tilt-card";
 
 type DoorCardProps = {
   href: string;
@@ -13,10 +14,11 @@ type DoorCardProps = {
 };
 
 /**
- * A miniature 3D door. It sits closed until hovered or keyboard-focused, then
- * swings open on its hinge (pure CSS, group-driven) to reveal the neon room
- * behind it. Activating the link walks you through into that page. `hue` tints
- * the whole door and its glow.
+ * A miniature 3D door. The whole card tilts on a spring toward the cursor with
+ * a moving glare; the neon room sits deep behind the door, which itself floats
+ * forward and swings open on its hinge (pure CSS, group-driven) on hover or
+ * keyboard focus. Activating the link walks you through into that page. `hue`
+ * tints the whole door and its glow.
  */
 export function DoorCard({ href, label, blurb, icon: Icon, hue = "room-1" }: DoorCardProps) {
   return (
@@ -26,22 +28,24 @@ export function DoorCard({ href, label, blurb, icon: Icon, hue = "room-1" }: Doo
       className="group scene-3d relative block h-72 rounded-2xl outline-none"
       aria-label={`Open ${label}`}
     >
-      <div className="flat-3d relative h-full w-full">
-        {/* Room revealed behind the door */}
-        <div className="interior-glow absolute inset-0 overflow-hidden rounded-2xl">
-          <div className="absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_40%,transparent,rgba(6,4,24,0.6))]" />
-          <div className="relative flex h-full flex-col items-center justify-center gap-3 px-5 text-center">
-            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-black/30 text-white ring-1 ring-white/25 backdrop-blur">
-              <Icon className="h-7 w-7" />
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.5)]">
-              Step in <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </span>
+      <TiltCard glare intensity={14} scale={1.03} className="h-full rounded-2xl">
+        {/* Room revealed behind the door — sits deep */}
+        <TiltLayer depth={-34} className="absolute inset-0">
+          <div className="interior-glow absolute inset-0 overflow-hidden rounded-2xl">
+            <div className="absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_40%,transparent,rgba(6,4,24,0.6))]" />
+            <div className="relative flex h-full flex-col items-center justify-center gap-3 px-5 text-center">
+              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-black/30 text-white ring-1 ring-white/25 backdrop-blur">
+                <Icon className="h-7 w-7" />
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.5)]">
+                Step in <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </div>
           </div>
-        </div>
+        </TiltLayer>
 
-        {/* The door itself, hinged on the left */}
-        <div className="absolute inset-0 [perspective:1200px]">
+        {/* The door itself, hinged on the left — floats forward */}
+        <TiltLayer depth={48} className="absolute inset-0 [perspective:1200px]">
           <div className="door-slab flat-3d backface-hidden absolute inset-0 origin-left rounded-2xl p-4 transition-transform duration-[600ms] ease-[cubic-bezier(0.34,1,0.42,1)] group-hover:[transform:rotateY(-72deg)] group-focus-visible:[transform:rotateY(-72deg)]">
             <div className="flex h-full flex-col">
               <div className="nameplate mb-3 flex h-8 items-center justify-center rounded-md px-3">
@@ -52,8 +56,8 @@ export function DoorCard({ href, label, blurb, icon: Icon, hue = "room-1" }: Doo
               <div className="brass absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full" aria-hidden="true" />
             </div>
           </div>
-        </div>
-      </div>
+        </TiltLayer>
+      </TiltCard>
     </Link>
   );
 }

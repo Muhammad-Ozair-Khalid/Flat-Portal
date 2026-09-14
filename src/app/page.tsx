@@ -15,7 +15,9 @@ import { Logo } from "@/components/brand/logo";
 import { SiteHeader } from "@/components/experience/site-header";
 import { Reveal } from "@/components/motion/reveal";
 import { Parallax } from "@/components/motion/parallax";
-import { Tilt3D } from "@/components/ui/tilt";
+import { TiltCard } from "@/components/motion/tilt-card";
+import { SpringStagger, StaggerItem } from "@/components/motion/spring-in";
+import { Magnetic } from "@/components/motion/magnetic";
 import { DoorHero } from "@/components/experience/door-hero";
 import { DoorCard } from "@/components/experience/door-card";
 import { RoomScene } from "@/components/experience/room-scene";
@@ -87,9 +89,9 @@ export default function LandingPage() {
                 <div key={room.variant} className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
                   <Reveal variant={flip ? "right" : "left"} className={flip ? "lg:order-2" : ""}>
                     <Parallax speed={0.08}>
-                      <Tilt3D max={5} className="overflow-hidden rounded-3xl border border-primary/20 elevate-lg">
+                      <TiltCard glare intensity={9} scale={1.02} className="overflow-hidden rounded-3xl border border-primary/20 elevate-lg">
                         <RoomScene variant={room.variant} accent={room.accent} className="block aspect-[16/10] w-full" />
-                      </Tilt3D>
+                      </TiltCard>
                     </Parallax>
                   </Reveal>
 
@@ -119,20 +121,21 @@ export default function LandingPage() {
                 Hover to open one — then step through into that corner of your flat.
               </p>
             </Reveal>
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {doors.map((d, i) => (
-                <Reveal key={d.href} variant="up" delay={i * 70}>
+            <SpringStagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {doors.map((d) => (
+                <StaggerItem key={d.href} className="h-full">
                   <DoorCard href={d.href} label={d.label} blurb={d.blurb} icon={d.icon} hue={d.hue} />
-                </Reveal>
+                </StaggerItem>
               ))}
-            </div>
+            </SpringStagger>
           </div>
         </section>
 
         {/* 4 — CTA */}
         <section className="mx-auto w-full max-w-6xl px-6 py-24">
           <Reveal variant="zoom">
-            <div className="ambient shine relative overflow-hidden rounded-3xl border border-primary/20 bg-card/80 px-8 py-16 text-center elevate-lg">
+            <div className="ambient shine isolate relative overflow-hidden rounded-3xl border border-primary/20 bg-card/80 px-8 py-16 text-center elevate-lg">
+              <div className="aurora-bg pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
               <h2 className="mx-auto max-w-2xl font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
                 The door&rsquo;s open. Come in.
               </h2>
@@ -140,12 +143,14 @@ export default function LandingPage() {
                 Sign in with the Google account your flat admin added, and pick up right where the
                 sticky notes left off.
               </p>
-              <Link
-                href="/login"
-                className="press mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-primary-foreground elevate raise hover:bg-primary-hover"
-              >
-                Continue with Google <ArrowRight className="h-4 w-4" />
-              </Link>
+              <Magnetic className="mt-9" strength={0.5}>
+                <Link
+                  href="/login"
+                  className="press inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-primary-foreground elevate hover:bg-primary-hover"
+                >
+                  Continue with Google <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Magnetic>
             </div>
           </Reveal>
         </section>

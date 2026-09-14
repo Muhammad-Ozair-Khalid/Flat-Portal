@@ -11,6 +11,7 @@ export function GreetingHero({
 }) {
   return (
     <div className="ambient relative mb-6 overflow-hidden rounded-3xl border border-border/70 bg-card/80 p-6 elevate-lg sm:p-8">
+      <div className="aurora-bg pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="relative z-[1] flex items-center justify-between gap-4">
         <div>
           <h1 className="font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">{title}</h1>

@@ -26,7 +26,8 @@ export default async function LoginPage({
   return (
     <div className="relative grid min-h-dvh lg:grid-cols-2">
       {/* Brand panel */}
-      <div className="ambient relative hidden flex-col justify-between overflow-hidden p-10 lg:flex">
+      <div className="ambient isolate relative hidden flex-col justify-between overflow-hidden p-10 lg:flex">
+        <div className="aurora-bg pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
         <Logo />
         <div className="mx-auto w-full max-w-md">
           <Tilt3D className="glass rounded-2xl border border-border/70 p-6 elevate-lg">

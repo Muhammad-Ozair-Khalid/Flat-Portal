@@ -1,7 +1,6 @@
 import type { LucideIcon } from "lucide-react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { CountUp } from "@/components/motion/count-up";
+import { StatTileMotion } from "@/components/ui/stat-tile-motion";
 
 type Tone = "primary" | "success" | "warning" | "danger" | "info";
 
@@ -29,8 +28,8 @@ export function StatTile({
   href?: string;
 }) {
   const color = toneColor[tone];
-  const inner = (
-    <>
+  return (
+    <StatTileMotion href={href}>
       <span
         className="absolute inset-x-0 top-0 h-1 rounded-t-2xl"
         style={{ background: `linear-gradient(90deg, ${color}, color-mix(in oklab, ${color} 45%, transparent))` }}
@@ -48,16 +47,6 @@ export function StatTile({
         {typeof value === "number" ? <CountUp value={value} /> : value}
       </div>
       {hint && <div className="mt-1 text-xs text-muted-foreground">{hint}</div>}
-    </>
+    </StatTileMotion>
   );
-
-  const base = "relative block overflow-hidden rounded-2xl border border-border/70 bg-card p-5 elevate";
-  if (href) {
-    return (
-      <Link href={href} className={cn(base, "raise")}>
-        {inner}
-      </Link>
-    );
-  }
-  return <div className={base}>{inner}</div>;
 }
