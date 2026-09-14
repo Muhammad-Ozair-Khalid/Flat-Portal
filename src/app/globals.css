@@ -4,68 +4,84 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ───────────────────────────────────────────────────────────
-   Flat Portal — "Cream & Espresso" grungy homestead identity
-   Warm cream paper, espresso ink, leather-brown primary, rust accent,
-   earthy status colours, and a subtle film-grain texture.
+   Flat Portal — "Aurora Indigo" identity
+   Deep indigo night, electric-violet primary, neon-cyan accent,
+   and a spectrum of per-room hues (violet / cyan / magenta / lime /
+   amber / emerald) that make the 3D doors and rooms glow.
    ─────────────────────────────────────────────────────────── */
 :root {
-  --background: #ece2ce;
-  --surface: #e4d7be;
-  --card: #f7f1e3;
-  --popover: #fbf7ec;
-  --foreground: #221a12;
-  --muted: #ddd0b5;
-  --muted-foreground: #6f5f49;
-  --primary: #8a5a2b;
-  --primary-hover: #744a22;
-  --primary-foreground: #f8f1e4;
-  --accent: #b05e2e;
-  --accent-foreground: #fbf0e6;
-  --border: #cebd9b;
-  --input: #cebd9b;
-  --ring: #8a5a2b;
+  --background: #f3f2ff;
+  --surface: #ecebff;
+  --card: #ffffff;
+  --popover: #ffffff;
+  --foreground: #171334;
+  --muted: #e4e2fb;
+  --muted-foreground: #5b5891;
+  --primary: #5b4be6;
+  --primary-hover: #4c3ed6;
+  --primary-foreground: #f7f6ff;
+  --accent: #0891b2;
+  --accent-foreground: #f0fcff;
+  --border: #dcd9f5;
+  --input: #dcd9f5;
+  --ring: #6d5efc;
 
-  --success: #5f7138;
-  --success-foreground: #f6f7ee;
-  --warning: #a97b20;
-  --warning-foreground: #fff7e6;
-  --danger: #a23a2a;
-  --danger-foreground: #fdeee9;
-  --info: #4a6a7a;
-  --info-foreground: #eef4f6;
+  --success: #0d9488;
+  --success-foreground: #effefb;
+  --warning: #d97706;
+  --warning-foreground: #fff8ee;
+  --danger: #e11d68;
+  --danger-foreground: #fff0f5;
+  --info: #2563eb;
+  --info-foreground: #eef4ff;
 
-  --radius: 0.85rem;
-  --grain-opacity: 0.5;
+  /* per-room accent hues (same in light + dark) */
+  --room-1: #7c6bff;   /* violet  */
+  --room-2: #22d3ee;   /* cyan    */
+  --room-3: #f43f9d;   /* magenta */
+  --room-4: #a3e635;   /* lime    */
+  --room-lounge: #fb923c; /* amber  */
+  --room-kitchen: #34d399; /* emerald */
+
+  --radius: 0.9rem;
+  --grain-opacity: 0.12;
   --grain-blend: soft-light;
 }
 
 .dark {
-  --background: #16110b;
-  --surface: #1e1710;
-  --card: #241c13;
-  --popover: #2a2016;
-  --foreground: #efe4d2;
-  --muted: #2c2318;
-  --muted-foreground: #ab9c84;
-  --primary: #ca9a5f;
-  --primary-hover: #d8a969;
-  --primary-foreground: #201509;
-  --accent: #d07d45;
-  --accent-foreground: #1e1206;
-  --border: #372b1d;
-  --input: #372b1d;
-  --ring: #ca9a5f;
+  --background: #0e0b2a;
+  --surface: #171338;
+  --card: #1b1640;
+  --popover: #201a4c;
+  --foreground: #eae8ff;
+  --muted: #241d55;
+  --muted-foreground: #a5a0d8;
+  --primary: #8b7bff;
+  --primary-hover: #9d8fff;
+  --primary-foreground: #0c0824;
+  --accent: #2ee6ff;
+  --accent-foreground: #04141a;
+  --border: #2c2668;
+  --input: #2c2668;
+  --ring: #8b7bff;
 
-  --success: #8aa354;
-  --success-foreground: #12160a;
-  --warning: #d3a54a;
-  --warning-foreground: #201603;
-  --danger: #d05a45;
-  --danger-foreground: #1f0a06;
-  --info: #7fa2b3;
-  --info-foreground: #0a1418;
+  --success: #2dd4bf;
+  --success-foreground: #03201c;
+  --warning: #fbbf24;
+  --warning-foreground: #241701;
+  --danger: #fb5c8f;
+  --danger-foreground: #2a0512;
+  --info: #60a5fa;
+  --info-foreground: #051029;
 
-  --grain-opacity: 0.7;
+  --room-1: #8b7bff;
+  --room-2: #34e3ff;
+  --room-3: #fb5cae;
+  --room-4: #bef264;
+  --room-lounge: #fd9a4d;
+  --room-kitchen: #3ee7ad;
+
+  --grain-opacity: 0.2;
   --grain-blend: overlay;
 }
 
@@ -94,6 +110,13 @@
   --color-danger-foreground: var(--danger-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
+
+  --color-room-1: var(--room-1);
+  --color-room-2: var(--room-2);
+  --color-room-3: var(--room-3);
+  --color-room-4: var(--room-4);
+  --color-room-lounge: var(--room-lounge);
+  --color-room-kitchen: var(--room-kitchen);
 
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
@@ -163,28 +186,28 @@
 @layer utilities {
   .elevate-sm {
     box-shadow:
-      0 1px 2px rgba(34, 20, 8, 0.08),
-      0 2px 6px -2px rgba(34, 20, 8, 0.12);
+      0 1px 2px rgba(23, 19, 52, 0.08),
+      0 2px 6px -2px rgba(23, 19, 52, 0.14);
   }
   .elevate {
     box-shadow:
-      0 1px 0 rgba(255, 250, 235, 0.5) inset,
-      0 2px 4px rgba(34, 20, 8, 0.08),
-      0 16px 32px -20px rgba(34, 20, 8, 0.45);
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 2px 4px rgba(23, 19, 52, 0.08),
+      0 16px 32px -20px rgba(45, 35, 120, 0.4);
   }
   .elevate-lg {
     box-shadow:
-      0 1px 0 rgba(255, 250, 235, 0.55) inset,
-      0 10px 22px -10px rgba(34, 20, 8, 0.28),
-      0 34px 64px -32px rgba(34, 20, 8, 0.6);
+      0 1px 0 rgba(255, 255, 255, 0.65) inset,
+      0 10px 22px -10px rgba(45, 35, 120, 0.24),
+      0 34px 64px -32px rgba(30, 22, 90, 0.5);
   }
   .dark .elevate,
   .dark .elevate-lg,
   .dark .elevate-sm {
     box-shadow:
-      0 1px 0 rgba(255, 230, 190, 0.06) inset,
-      0 12px 28px -12px rgba(0, 0, 0, 0.7),
-      0 34px 64px -32px rgba(0, 0, 0, 0.8);
+      0 1px 0 rgba(160, 150, 255, 0.08) inset,
+      0 12px 28px -12px rgba(0, 0, 0, 0.65),
+      0 34px 64px -32px rgba(3, 0, 20, 0.85);
   }
   .glass {
     background-color: color-mix(in oklab, var(--card) 74%, transparent);
@@ -192,16 +215,16 @@
     -webkit-backdrop-filter: blur(14px) saturate(1.35);
   }
   .text-gradient {
-    background: linear-gradient(100deg, var(--primary), var(--accent) 60%, var(--warning));
+    background: linear-gradient(100deg, var(--primary), var(--accent) 52%, var(--room-3) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
   .ambient {
     background-image:
-      radial-gradient(58% 55% at 10% 6%, color-mix(in oklab, var(--primary) 30%, transparent), transparent 70%),
-      radial-gradient(55% 50% at 94% 10%, color-mix(in oklab, var(--accent) 26%, transparent), transparent 70%),
-      radial-gradient(70% 60% at 60% 108%, color-mix(in oklab, var(--warning) 18%, transparent), transparent 70%);
+      radial-gradient(58% 55% at 10% 6%, color-mix(in oklab, var(--primary) 34%, transparent), transparent 70%),
+      radial-gradient(55% 50% at 94% 10%, color-mix(in oklab, var(--accent) 30%, transparent), transparent 70%),
+      radial-gradient(70% 60% at 60% 108%, color-mix(in oklab, var(--room-3) 24%, transparent), transparent 70%);
   }
   /* 3D-ish hover lift */
   .raise {
@@ -322,59 +345,86 @@
   50% { opacity: 0.9; }
 }
 
-/* ── 3D door "step inside" experience ────────────────────────── */
+/* ── 3D door "step inside" experience ────────────────────────────
+   Every door/room reads its neon accent from --rim (default violet);
+   set --rim per room to recolour the whole slab, glow and interior. */
 @layer utilities {
   .scene-3d { perspective: 1500px; perspective-origin: 50% 46%; }
   .flat-3d { transform-style: preserve-3d; }
   .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  /* Neon outline that traces an element's border-radius */
+  .neon-edge {
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklab, var(--rim, #7c6bff) 55%, transparent),
+      0 0 18px -2px color-mix(in oklab, var(--rim, #7c6bff) 55%, transparent);
+  }
+  /* Frosted glass surface for tiles/panels */
+  .glass-panel {
+    background:
+      linear-gradient(150deg, color-mix(in oklab, var(--rim, #7c6bff) 14%, rgba(255,255,255,0.06)), rgba(12,10,40,0.34));
+    backdrop-filter: blur(9px) saturate(1.2);
+    -webkit-backdrop-filter: blur(9px) saturate(1.2);
+  }
 }
 
-@keyframes lamp-flicker {
-  0%, 100% { opacity: 0.82; }
-  48% { opacity: 0.9; }
-  50% { opacity: 0.68; }
-  52% { opacity: 0.88; }
+@keyframes neon-breathe {
+  0%, 100% { opacity: 0.72; }
+  50% { opacity: 1; }
 }
 
 @layer components {
-  /* Warm interior light seen behind / through an opening door */
+  /* Neon interior light seen behind / through an opening door */
   .interior-glow {
     background:
-      radial-gradient(58% 66% at 50% 58%, #ffe9bd 0%, #f2b866 30%, #bd6f2e 62%, #5c3315 100%);
+      radial-gradient(62% 72% at 50% 56%,
+        color-mix(in oklab, var(--rim, #7c6bff) 92%, white 8%) 0%,
+        color-mix(in oklab, var(--rim, #7c6bff) 62%, #0b0730) 42%,
+        #08051f 100%);
   }
-  /* Solid timber door slab with a raised, dimensional look */
+  /* Brushed dark-metal / smoked-glass door slab with a neon rim-light */
   .door-slab {
     background:
-      linear-gradient(90deg, rgba(0,0,0,.36) 0%, rgba(0,0,0,0) 9%, rgba(255,244,224,.12) 47%, rgba(0,0,0,0) 90%, rgba(0,0,0,.42) 100%),
-      linear-gradient(158deg, #9c6733 0%, #6f4521 52%, #4a2c13 100%);
+      linear-gradient(105deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 26%, rgba(255,255,255,.05) 52%, rgba(0,0,0,0) 74%, rgba(0,0,0,.28) 100%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.028) 0 2px, rgba(0,0,0,.05) 2px 4px),
+      linear-gradient(158deg, #2b2560 0%, #191446 52%, #0d0a2c 100%);
     box-shadow:
-      inset 0 0 0 2px rgba(20,10,2,.4),
-      inset 0 3px 0 rgba(255,238,210,.16),
-      0 30px 70px -30px rgba(0,0,0,.75);
+      inset 0 0 0 1px color-mix(in oklab, var(--rim, #7c6bff) 60%, transparent),
+      inset 0 3px 0 rgba(255,255,255,.14),
+      inset 0 -30px 60px -30px color-mix(in oklab, var(--rim, #7c6bff) 55%, transparent),
+      0 0 26px -4px color-mix(in oklab, var(--rim, #7c6bff) 50%, transparent),
+      0 34px 74px -30px rgba(0,0,0,.85);
   }
   .door-panel {
-    border-radius: 8px;
-    background: linear-gradient(158deg, rgba(0,0,0,.32), rgba(255,240,214,.09));
+    border-radius: 10px;
+    background:
+      linear-gradient(158deg, color-mix(in oklab, var(--rim, #7c6bff) 24%, rgba(255,255,255,.06)) 0%, rgba(9,7,32,.5) 100%);
     box-shadow:
-      inset 0 3px 9px rgba(0,0,0,.6),
-      inset 0 -2px 0 rgba(255,240,214,.11),
-      inset 0 0 0 1px rgba(20,10,2,.45);
+      inset 0 2px 10px rgba(0,0,0,.5),
+      inset 0 -2px 0 rgba(255,255,255,.08),
+      inset 0 0 0 1px color-mix(in oklab, var(--rim, #7c6bff) 40%, transparent);
   }
+  /* Chrome knob with a neon halo */
   .brass {
-    background: radial-gradient(circle at 34% 28%, #ffeaa6, #c9a244 46%, #7a591c 100%);
-    box-shadow: 0 1px 3px rgba(0,0,0,.55), inset 0 1px 1px rgba(255,255,255,.55);
+    background: radial-gradient(circle at 34% 28%, #ffffff, #c7ccff 42%, color-mix(in oklab, var(--rim, #7c6bff) 72%, #3a3a6a) 100%);
+    box-shadow:
+      0 0 12px color-mix(in oklab, var(--rim, #7c6bff) 65%, transparent),
+      inset 0 1px 1px rgba(255,255,255,.85),
+      0 1px 3px rgba(0,0,0,.55);
   }
+  /* Glowing house-number / label plate */
   .nameplate {
-    background: linear-gradient(160deg, #dcb45f, #8a6a25);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 2px 5px rgba(0,0,0,.5);
+    background: linear-gradient(160deg, color-mix(in oklab, var(--rim, #7c6bff) 34%, #0d0a2c), #0d0a2c);
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklab, var(--rim, #7c6bff) 70%, transparent),
+      0 0 16px -2px color-mix(in oklab, var(--rim, #7c6bff) 55%, transparent);
   }
   /* Door architrave / casing */
   .door-casing {
-    background: linear-gradient(158deg, #efe0c2, #cdb489 60%, #a98c5f);
-    box-shadow: 0 24px 60px -28px rgba(0,0,0,.6), inset 0 0 0 1px rgba(0,0,0,.12);
-  }
-  .dark .door-casing {
-    background: linear-gradient(158deg, #3a2c1c, #271d12 60%, #1c140c);
+    background: linear-gradient(158deg, #211b52, #16123f 60%, #0d0a2c);
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklab, var(--rim, #7c6bff) 32%, transparent),
+      0 0 34px -6px color-mix(in oklab, var(--rim, #7c6bff) 30%, transparent),
+      0 26px 64px -28px rgba(0,0,0,.75);
   }
 }
 

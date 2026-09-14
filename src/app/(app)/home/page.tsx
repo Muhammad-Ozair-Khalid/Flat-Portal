@@ -14,6 +14,7 @@ import { Card, CardHeader, CardTitle, CardBody } from "@/components/ui/card";
 import { StatusBadge, PriorityBadge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/ui/empty-state";
 import { GreetingHero } from "@/components/app/greeting-hero";
+import { FlatGlance } from "@/components/experience/flat-glance";
 import { Reveal } from "@/components/motion/reveal";
 import { fmtDate, fromNow, isOverdue } from "@/lib/format";
 import type { TaskPriority, TaskStatus } from "@/lib/types";
@@ -81,6 +82,10 @@ export default async function MemberHome() {
           <StatTile label="Completed" value={counts.completed} icon={CheckCircle2} tone="success" href="/tasks" />
           <StatTile label="Overdue" value={counts.overdue} icon={AlertTriangle} tone="danger" href="/tasks" hint={counts.overdue ? "Needs attention" : undefined} />
         </div>
+      </Reveal>
+
+      <Reveal variant="up" className="mt-6 block">
+        <FlatGlance href="/rooms" />
       </Reveal>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">

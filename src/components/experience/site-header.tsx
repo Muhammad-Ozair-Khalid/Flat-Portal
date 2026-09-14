@@ -27,7 +27,7 @@ export function SiteHeader() {
         }`}
       >
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-3.5">
-          <Logo className={scrolled ? "" : "[&_span]:text-[#fbecca]"} />
+          <Logo className={scrolled ? "" : "[&_span]:text-[#eae8ff]"} />
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <Link
@@ -35,7 +35,7 @@ export function SiteHeader() {
               className={`press rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                 scrolled
                   ? "bg-primary text-primary-foreground hover:bg-primary-hover"
-                  : "bg-[#e7c98d] text-[#2a1806] hover:bg-[#f0d59b]"
+                  : "bg-[#6d5efc] text-white shadow-[0_0_20px_-4px_rgba(109,94,252,0.7)] hover:bg-[#8b7bff]"
               }`}
             >
               Sign in

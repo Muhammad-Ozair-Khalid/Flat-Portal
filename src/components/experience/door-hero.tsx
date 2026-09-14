@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowDown, KeyRound } from "lucide-react";
 
 /**
- * The front door of Flat 3B. As the wrapper scrolls past, the timber door
- * swings open on its hinge (rotateY), the whole scene dollies forward
- * (translateZ + scale) so the camera walks through the doorway, and the screen
- * washes warm as you arrive inside — then a short "you're home" beat holds
+ * The front door of Flat 408. As the wrapper scrolls past, the glass-and-metal
+ * door swings open on its hinge (rotateY), the whole scene dollies forward
+ * (translateZ + scale) so the camera walks through the doorway, and the neon
+ * interior glows up as you arrive inside — then a short "you're home" beat holds
  * before the hero releases into the flat. All transforms are written straight
  * to the DOM from one eased rAF loop.
  */
@@ -95,7 +95,7 @@ export function DoorHero() {
 
   return (
     <section ref={wrapRef} className={reduced ? "relative" : "relative h-[280vh]"}>
-      <div className="sticky top-0 flex h-svh items-center justify-center overflow-hidden bg-[#1c1108]">
+      <div className="sticky top-0 flex h-svh items-center justify-center overflow-hidden bg-[#0b0722]">
         {/* full-screen warm interior wash — ramps up as the camera enters */}
         <div ref={bgGlowRef} className="interior-glow pointer-events-none absolute inset-0 opacity-[0.12]" aria-hidden="true" />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_125%,transparent,rgba(0,0,0,0.7))]" aria-hidden="true" />
@@ -105,9 +105,9 @@ export function DoorHero() {
           <div ref={worldRef} className="flat-3d relative" style={{ willChange: "transform" }}>
             {/* Doorway casing — tall and squared like a real door */}
             <div className="door-casing relative rounded-[10px] p-3 sm:p-3.5">
-              <div className="relative h-[460px] w-[228px] overflow-hidden rounded-[6px] bg-[#170d05] sm:h-[588px] sm:w-[300px]">
+              <div className="relative h-[460px] w-[228px] overflow-hidden rounded-[6px] bg-[#08051f] sm:h-[588px] sm:w-[300px]">
                 <div ref={glowRef} className="interior-glow absolute inset-0 opacity-30" aria-hidden="true" />
-                <div className="absolute inset-x-6 bottom-0 h-1/3 bg-[linear-gradient(to_top,rgba(28,14,4,0.72),transparent)]" aria-hidden="true" />
+                <div className="absolute inset-x-6 bottom-0 h-1/3 bg-[linear-gradient(to_top,rgba(8,5,31,0.72),transparent)]" aria-hidden="true" />
 
                 {/* door slab, hinged on the left */}
                 <div className="flat-3d absolute inset-0" style={{ perspective: "1400px" }}>
@@ -116,8 +116,8 @@ export function DoorHero() {
                     className="door-slab backface-hidden absolute inset-0 origin-left rounded-[5px] p-4 sm:p-5"
                     style={{ transformStyle: "preserve-3d", willChange: "transform" }}
                   >
-                    <div className="nameplate mx-auto mb-4 flex h-8 w-14 items-center justify-center rounded-[4px] sm:h-9 sm:w-16">
-                      <span className="font-display text-sm font-extrabold tracking-wide text-[#3a2a0c] sm:text-base">3B</span>
+                    <div className="nameplate mx-auto mb-4 flex h-8 w-16 items-center justify-center rounded-[4px] sm:h-9 sm:w-20">
+                      <span className="font-display text-sm font-extrabold tracking-wide text-[#eae8ff] [text-shadow:0_0_10px_var(--rim,#7c6bff)] sm:text-base">408</span>
                     </div>
                     <div className="brass mx-auto mb-4 h-2.5 w-2.5 rounded-full" aria-hidden="true" />
                     <div className="grid h-[calc(100%-5rem)] grid-rows-2 gap-4 sm:gap-5">
@@ -129,25 +129,25 @@ export function DoorHero() {
                 </div>
               </div>
             </div>
-            <div className="mx-auto mt-3 h-3.5 w-[200px] rounded-[5px] bg-[linear-gradient(160deg,#6f5f49,#4c4030)] opacity-80 shadow-[0_18px_28px_-14px_rgba(0,0,0,0.85)] sm:w-[270px]" aria-hidden="true" />
+            <div className="mx-auto mt-3 h-3.5 w-[200px] rounded-[5px] bg-[linear-gradient(160deg,#2b2560,#0d0a2c)] opacity-90 shadow-[0_18px_28px_-14px_rgba(0,0,0,0.9)] sm:w-[270px]" aria-hidden="true" />
           </div>
         </div>
 
         {/* intro copy */}
         <div ref={copyRef} className="relative z-10 mx-auto max-w-2xl px-6 text-center" style={{ willChange: "transform, opacity" }}>
-          <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[460px] w-[720px] max-w-[94vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(14,8,2,0.88),rgba(14,8,2,0.5)_58%,transparent)]" aria-hidden="true" />
-          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#e6c88f]/30 bg-black/40 px-3.5 py-1.5 text-sm text-[#f3dcae] backdrop-blur">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[460px] w-[720px] max-w-[94vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(6,4,24,0.9),rgba(6,4,24,0.5)_58%,transparent)]" aria-hidden="true" />
+          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#8b7bff]/40 bg-white/5 px-3.5 py-1.5 text-sm text-[#c9c2ff] backdrop-blur">
             <KeyRound className="h-4 w-4" />
-            Flat 3B · Elm Court
+            Flat 408
           </span>
-          <h1 className="font-display text-5xl font-extrabold leading-[0.98] tracking-tight text-[#fbecca] drop-shadow-[0_2px_20px_rgba(0,0,0,0.7)] sm:text-7xl">
+          <h1 className="font-display text-5xl font-extrabold leading-[0.98] tracking-tight text-[#eae8ff] drop-shadow-[0_2px_24px_rgba(109,94,252,0.45)] sm:text-7xl">
             Come on in.
           </h1>
-          <p className="mx-auto mt-5 max-w-md text-lg leading-relaxed text-[#e7d3ac]">
+          <p className="mx-auto mt-5 max-w-md text-lg leading-relaxed text-[#b9b3e8]">
             Everything your shared home runs on — chores, chat, reminders, who&rsquo;s in — waiting
             just inside the door.
           </p>
-          <div ref={hintRef} className="mt-10 flex flex-col items-center gap-2 text-[#e7d3ac]">
+          <div ref={hintRef} className="mt-10 flex flex-col items-center gap-2 text-[#b9b3e8]">
             <ArrowDown className="h-5 w-5 animate-bounce" />
             <span className="text-xs uppercase tracking-[0.25em]">Scroll to open the door</span>
           </div>
@@ -155,10 +155,10 @@ export function DoorHero() {
 
         {/* arrival copy — fades in once you're through */}
         <div ref={arriveRef} className="pointer-events-none relative z-10 mx-auto max-w-2xl px-6 text-center opacity-0" style={{ willChange: "transform, opacity", position: "absolute" }}>
-          <h2 className="font-display text-5xl font-extrabold tracking-tight text-[#fff2d4] drop-shadow-[0_2px_24px_rgba(0,0,0,0.55)] sm:text-7xl">
+          <h2 className="font-display text-5xl font-extrabold tracking-tight text-[#eae8ff] drop-shadow-[0_2px_28px_rgba(46,230,255,0.4)] sm:text-7xl">
             Welcome home.
           </h2>
-          <p className="mx-auto mt-4 max-w-sm text-lg text-[#f0dcb4]">Keep scrolling — the flat&rsquo;s this way.</p>
+          <p className="mx-auto mt-4 max-w-sm text-lg text-[#c9c2ff]">Keep scrolling — the flat&rsquo;s this way.</p>
         </div>
       </div>
     </section>

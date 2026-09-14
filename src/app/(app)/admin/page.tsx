@@ -16,6 +16,7 @@ import { StatusBadge, PriorityBadge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { EmptyState } from "@/components/ui/empty-state";
 import { GreetingHero } from "@/components/app/greeting-hero";
+import { FlatGlance } from "@/components/experience/flat-glance";
 import { Reveal } from "@/components/motion/reveal";
 import { describeAudit } from "@/lib/audit-labels";
 import { fromNow, fmtDate } from "@/lib/format";
@@ -80,6 +81,10 @@ export default async function AdminDashboard() {
           <StatTile label="Completed" value={completedTasks.count ?? 0} icon={CheckCircle2} tone="success" href="/admin/tasks" />
           <StatTile label="Overdue" value={overdueTasks.count ?? 0} icon={AlertTriangle} tone="danger" href="/admin/tasks" hint={overdueTasks.count ? "Past deadline" : undefined} />
         </div>
+      </Reveal>
+
+      <Reveal variant="up" className="mt-6 block">
+        <FlatGlance href="/admin/rooms" />
       </Reveal>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">

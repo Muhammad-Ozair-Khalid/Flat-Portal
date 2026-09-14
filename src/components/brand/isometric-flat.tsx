@@ -18,21 +18,21 @@ type Room = {
   color: string;
 };
 
-// A clean 6×5 plot, fully tiled.
+// A clean 6×5 plot, fully tiled — each room its own Aurora Indigo hue.
 const rooms: Room[] = [
-  { name: "Living", x: 0, y: 0, w: 3, h: 3, color: "#8a5a2b" },
-  { name: "Kitchen", x: 3, y: 0, w: 3, h: 2, color: "#a97b20" },
-  { name: "Room A", x: 3, y: 2, w: 3, h: 1, color: "#c08a4a" },
-  { name: "Hall", x: 0, y: 3, w: 2, h: 2, color: "#6f7a3f" },
-  { name: "Bath", x: 2, y: 3, w: 1, h: 2, color: "#4a6a7a" },
-  { name: "Room B", x: 3, y: 3, w: 3, h: 2, color: "#a23a2a" },
+  { name: "Living", x: 0, y: 0, w: 3, h: 3, color: "#6d5efc" },
+  { name: "Kitchen", x: 3, y: 0, w: 3, h: 2, color: "#34d399" },
+  { name: "Room A", x: 3, y: 2, w: 3, h: 1, color: "#22d3ee" },
+  { name: "Hall", x: 0, y: 3, w: 2, h: 2, color: "#fb923c" },
+  { name: "Bath", x: 2, y: 3, w: 1, h: 2, color: "#f43f9d" },
+  { name: "Room B", x: 3, y: 3, w: 3, h: 2, color: "#a3e635" },
 ];
 
 type Pin = { room: string; label: string; color: string };
 const pins: Pin[] = [
-  { room: "Living", label: "AK", color: "#8a5a2b" },
-  { room: "Kitchen", label: "SJ", color: "#b05e2e" },
-  { room: "Room B", label: "MR", color: "#a23a2a" },
+  { room: "Living", label: "AK", color: "#6d5efc" },
+  { room: "Kitchen", label: "SJ", color: "#34d399" },
+  { room: "Room B", label: "MR", color: "#a3e635" },
 ];
 
 function iso(gx: number, gy: number) {
@@ -59,15 +59,15 @@ export function IsometricFlat({ className }: { className?: string }) {
       viewBox="0 0 300 250"
       className={cn("h-auto w-full", className)}
       role="img"
-      aria-label="Isometric floor plan of a shared flat with three flatmates"
+      aria-label="Isometric floor plan of the shared flat"
     >
       <defs>
         <filter id="softshadow" x="-30%" y="-30%" width="160%" height="160%">
-          <feDropShadow dx="0" dy="6" stdDeviation="5" floodColor="#0c1a15" floodOpacity="0.28" />
+          <feDropShadow dx="0" dy="6" stdDeviation="5" floodColor="#06041a" floodOpacity="0.4" />
         </filter>
         <radialGradient id="plot-glow" cx="50%" cy="40%" r="65%">
-          <stop offset="0%" stopColor="#c79a5e" stopOpacity="0.32" />
-          <stop offset="100%" stopColor="#c79a5e" stopOpacity="0" />
+          <stop offset="0%" stopColor="#6d5efc" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#6d5efc" stopOpacity="0" />
         </radialGradient>
       </defs>
 
@@ -118,7 +118,7 @@ export function IsometricFlat({ className }: { className?: string }) {
         const lift = 30;
         return (
           <g key={pin.label} style={{ animation: `flatpin-float 4s ease-in-out ${i * 0.6}s infinite` }}>
-            <ellipse cx={c.x} cy={c.y + 2} rx="9" ry="4.5" fill="#0c1a15" opacity="0.22" />
+            <ellipse cx={c.x} cy={c.y + 2} rx="9" ry="4.5" fill="#06041a" opacity="0.3" />
             <g filter="url(#softshadow)">
               <circle cx={c.x} cy={c.y - lift} r="12" fill={pin.color} stroke="#ffffff" strokeWidth="2" />
               <path
