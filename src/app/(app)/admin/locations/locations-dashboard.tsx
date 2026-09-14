@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { MapPinned, MapPinOff } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";

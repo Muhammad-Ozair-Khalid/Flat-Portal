@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   BedDouble,
@@ -12,7 +12,6 @@ import {
   Pencil,
   Check,
   X,
-  Info,
 } from "lucide-react";
 import {
   ROOMS,
@@ -50,8 +49,8 @@ function initialsOf(name: string): string {
  * sections. Each of the six rooms is a neon "night" tile whose door swings open
  * on hover/keyboard-focus to reveal the room behind it. Bedrooms list their
  * occupant seats (2/2/2/3) with an attached-washroom badge; the kitchen shows
- * its fridge. Admins can type a real person into any seat — saved to this
- * device now, ready to sync once Supabase is wired up.
+ * its fridge. Admins can name the person in any seat; names are saved on the
+ * device.
  */
 export function FlatFloor({ role }: { role: "member" | "admin" }) {
   const isAdmin = role === "admin";
@@ -77,11 +76,6 @@ export function FlatFloor({ role }: { role: "member" | "admin" }) {
     }
   }, [names, loaded]);
 
-  const filledCount = useMemo(
-    () => Object.values(names).filter((v) => v.trim()).length,
-    [names],
-  );
-
   function setName(id: string, value: string) {
     setNames((prev) => {
       const next = { ...prev };
@@ -94,9 +88,9 @@ export function FlatFloor({ role }: { role: "member" | "admin" }) {
 
   return (
     <div>
-      {/* Summary + local-demo banner */}
+      {/* Summary */}
       <Reveal variant="up">
-        <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-border/70 bg-card/70 p-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-6 rounded-2xl border border-border/70 bg-card/70 p-4">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
               <BedDouble className="h-4 w-4 text-primary" /> 4 bedrooms
@@ -111,12 +105,6 @@ export function FlatFloor({ role }: { role: "member" | "admin" }) {
               <Users className="h-4 w-4 text-accent" /> {MEMBER_COUNT} members
             </span>
           </div>
-          <p className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-muted/50 px-3 py-1 text-xs text-muted-foreground">
-            <Info className="h-3.5 w-3.5" />
-            {isAdmin
-              ? `Local demo — ${filledCount}/${MEMBER_COUNT} named on this device. Connect Supabase to sync.`
-              : "Names are placeholders until an admin adds real people."}
-          </p>
         </div>
       </Reveal>
 

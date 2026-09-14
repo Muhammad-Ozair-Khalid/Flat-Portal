@@ -3,9 +3,9 @@
  *
  * Four bedrooms (each with an attached washroom), a TV lounge and a kitchen
  * with a fridge; nine members in total (2 + 2 + 2 in three rooms, 3 in the
- * fourth). The member names below are editable placeholders — swap them for
- * real people once Supabase is wired up. Everything visual (landing, the 3D
- * flat floor, the ledger) reads from here so there's one place to edit.
+ * fourth). Seats start with generic labels that an admin renames from the 3D
+ * floor. Everything visual (landing, the 3D flat floor, the ledger) reads from
+ * here so there's one place to edit.
  */
 import type { CSSProperties } from "react";
 
@@ -49,8 +49,8 @@ export const ROOMS: Room[] = [
 export const BEDROOMS = ROOMS.filter((r) => r.kind === "bedroom");
 
 /**
- * Nine placeholder occupants, distributed 2/2/2/3 across the bedrooms.
- * Names are stand-ins ("Roommate 1"…) meant to be replaced with real people.
+ * Nine occupant seats, distributed 2/2/2/3 across the bedrooms. Each starts
+ * with a generic label ("Roommate 1"…) that an admin renames on the 3D floor.
  */
 export const MEMBERS: Member[] = BEDROOMS.flatMap((room, roomIdx) =>
   Array.from({ length: room.capacity ?? 0 }, (_, seat) => {

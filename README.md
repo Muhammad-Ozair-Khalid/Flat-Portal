@@ -4,8 +4,8 @@ A full-stack **flat management system** for people who share a home — chores, 
 notifications and live location, with strict admin oversight and member privacy.
 
 Built with **Next.js 15 (App Router)** + **Supabase** (Postgres, Google OAuth,
-Realtime, Storage, Row-Level Security). No mock data — every feature is wired to
-the database.
+Realtime, Storage, Row-Level Security). Every core feature — auth, users, tasks,
+chat, notifications, announcements, live location — is wired to the database.
 
 ---
 
@@ -22,7 +22,7 @@ the database.
 - **Announcements** — broadcast to the whole flat.
 - **Audit log** — a record of important admin actions.
 - **Security** — RLS on every table, nonce CSP, security headers, rate limiting, server-side authorization, input validation.
-- **Design** — responsive, light/dark, distinctive "verdigris & brass" identity with a 3D floor-plan hero.
+- **Design** — responsive, light/dark, a distinctive "Aurora Indigo" identity with an interactive 3D flat-floor hero and spring-physics motion.
 
 ## Tech stack
 

@@ -5,7 +5,6 @@ import {
   Wallet,
   Plus,
   Trash2,
-  Info,
   ArrowRight,
   Scale,
   Receipt,
@@ -27,13 +26,6 @@ const STORAGE_KEY = "flat408-ledger";
 const NAMES_KEY = "flat408-room-names"; // shared with the rooms floor
 
 const ALL_IDS = MEMBERS.map((m) => m.id);
-
-const SEED: Entry[] = [
-  { id: "seed-1", payerId: "m1", amount: 4200, note: "Groceries — big Sunday run", date: "2026-09-08", participantIds: ALL_IDS },
-  { id: "seed-2", payerId: "m3", amount: 3600, note: "Internet + electricity", date: "2026-09-05", participantIds: ALL_IDS },
-  { id: "seed-3", payerId: "m2", amount: 2400, note: "Water bottles delivery", date: "2026-09-12", participantIds: ALL_IDS },
-  { id: "seed-4", payerId: "m6", amount: 1500, note: "Cleaning supplies", date: "2026-09-11", participantIds: ALL_IDS },
-];
 
 function newId(): string {
   try {
@@ -68,9 +60,9 @@ export function LedgerBook() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      setEntries(raw ? (JSON.parse(raw) as Entry[]) : SEED);
+      if (raw) setEntries(JSON.parse(raw) as Entry[]);
     } catch {
-      setEntries(SEED);
+      /* ignore malformed storage */
     }
     try {
       const rawNames = localStorage.getItem(NAMES_KEY);
@@ -208,10 +200,6 @@ export function LedgerBook() {
               <Users className="h-4 w-4 text-accent" /> {MEMBERS.length} members
             </span>
           </div>
-          <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border/70 bg-muted/50 px-3 py-1 text-xs text-muted-foreground">
-            <Info className="h-3.5 w-3.5" />
-            Local demo — entries are saved on this device. Connect Supabase to sync for everyone.
-          </p>
         </div>
       </div>
 
