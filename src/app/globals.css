@@ -322,6 +322,62 @@
   50% { opacity: 0.9; }
 }
 
+/* ── 3D door "step inside" experience ────────────────────────── */
+@layer utilities {
+  .scene-3d { perspective: 1500px; perspective-origin: 50% 46%; }
+  .flat-3d { transform-style: preserve-3d; }
+  .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+}
+
+@keyframes lamp-flicker {
+  0%, 100% { opacity: 0.82; }
+  48% { opacity: 0.9; }
+  50% { opacity: 0.68; }
+  52% { opacity: 0.88; }
+}
+
+@layer components {
+  /* Warm interior light seen behind / through an opening door */
+  .interior-glow {
+    background:
+      radial-gradient(58% 66% at 50% 58%, #ffe9bd 0%, #f2b866 30%, #bd6f2e 62%, #5c3315 100%);
+  }
+  /* Solid timber door slab with a raised, dimensional look */
+  .door-slab {
+    background:
+      linear-gradient(90deg, rgba(0,0,0,.36) 0%, rgba(0,0,0,0) 9%, rgba(255,244,224,.12) 47%, rgba(0,0,0,0) 90%, rgba(0,0,0,.42) 100%),
+      linear-gradient(158deg, #9c6733 0%, #6f4521 52%, #4a2c13 100%);
+    box-shadow:
+      inset 0 0 0 2px rgba(20,10,2,.4),
+      inset 0 3px 0 rgba(255,238,210,.16),
+      0 30px 70px -30px rgba(0,0,0,.75);
+  }
+  .door-panel {
+    border-radius: 8px;
+    background: linear-gradient(158deg, rgba(0,0,0,.32), rgba(255,240,214,.09));
+    box-shadow:
+      inset 0 3px 9px rgba(0,0,0,.6),
+      inset 0 -2px 0 rgba(255,240,214,.11),
+      inset 0 0 0 1px rgba(20,10,2,.45);
+  }
+  .brass {
+    background: radial-gradient(circle at 34% 28%, #ffeaa6, #c9a244 46%, #7a591c 100%);
+    box-shadow: 0 1px 3px rgba(0,0,0,.55), inset 0 1px 1px rgba(255,255,255,.55);
+  }
+  .nameplate {
+    background: linear-gradient(160deg, #dcb45f, #8a6a25);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 2px 5px rgba(0,0,0,.5);
+  }
+  /* Door architrave / casing */
+  .door-casing {
+    background: linear-gradient(158deg, #efe0c2, #cdb489 60%, #a98c5f);
+    box-shadow: 0 24px 60px -28px rgba(0,0,0,.6), inset 0 0 0 1px rgba(0,0,0,.12);
+  }
+  .dark .door-casing {
+    background: linear-gradient(158deg, #3a2c1c, #271d12 60%, #1c140c);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
